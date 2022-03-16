@@ -1,5 +1,5 @@
 <?php
-    require 'Model_students.php';
+    require 'Model_for_all';
     $model  = new Model_students();
     $model->tables  ='students';
     $id     = $_REQUEST['id'];

@@ -1,10 +1,10 @@
 <?php
-    require 'models/Model_students.php';
-    require 'models/Model_subscription.php';
+
     $model = new Model_students();
     $id    = $_REQUEST['id'];
     $model->tables = 'students';
     $row  = $model->read($id);
+
 ?>
 <div class="container">
     <div class="row">
@@ -44,20 +44,7 @@
                             <th scope="col">Schoolroom is : </th>
                             <td class="text-danger text-bold"><?= $row_schoolroom['name'] ?></td>
                         </tr>
-<?php
-    $model_sub     = new Model_subscription();
-    $model->tables = 'subscriptions';
-    $row_sub       = $model_sub->read_student($id);
-    $row_sub_value = $row_sub['value'];
-    if (!$row_sub_value) {
-?>
-                        <tr>
-                            <th scope="col"><?= $row_sub['month']." : "?></th>
-                            <td class="text-danger text-bold"><?= $row_sub['value'] ?></td>
-                        </tr>
-<?php
-    }
-?>
+
 
                     </thead>
                     <tbody>
