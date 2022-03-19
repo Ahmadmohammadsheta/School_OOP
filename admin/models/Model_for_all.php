@@ -27,7 +27,7 @@ class Modal_for_all {
         $select = "SELECT * FROM $this->tables ";
         if ($query = $this->connect->query($select)) {
             while ($row   = mysqli_fetch_assoc($query)) {
-                $data[]      = $row;
+                $data[]   = $row;
                 // print_r($data);echo "<pre>";           
             }
         }
@@ -45,14 +45,28 @@ class Modal_for_all {
         return $data;
     }
 
-    public function delete ($id) {
-        $delete = "DELETE FROM $this->tables WHERE id = '$id' ";
-        if ($query  = $this->connect->query($delete)) {
+    public function delete($table, $id) {
+        $delete = "DELETE FROM $table WHERE id = '$id' ";
+        if ($this->connect->query($delete)) {
             return true;
         } else {
-            return false;
+            echo $table;echo '<br>';
+            echo $id;echo '<br>';
+            print_r($this->connect);
+
+            // return false;
         }
+        
     }
+
+    // public function delete($id) {
+    //     $delete = "DELETE FROM $this->tables WHERE id = '$id' ";
+    //     if ($query  = $this->connect->query($delete)) {
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    // }
  
 
     public function test() {

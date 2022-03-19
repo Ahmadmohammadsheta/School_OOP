@@ -1,12 +1,16 @@
 
-<!-- SEARCH FORM -->
+<?php
+  $model_absence          = new Model_absence();
+  $model_absence->tables  = 'absence';
+  $absences[]             = $model_absence->insert_absence();
 
+
+?>
 <br>
 <div class="container">
   <div class="row">
     <div class="col-lg-11"  style="margin: 25px;">
         <div class="card-body">
-          <a href="students.php?action=add" class="btn btn-info" style="margin-bottom: 10px;">Add Absence</a>
             <table class="table table-bordered m-3">
               <thead>                  
                 <tr>
@@ -14,10 +18,11 @@
                   <th>الاسم</th>
                   <th>الفصل</th>
                   <th>الغياب</th>
-                  <th>اجراء</th>
+                  <th>اليوم</th>
                 </tr>
               </thead>
               <tbody>
+              <form action="" method="post">
 <?php
   $model_students            = new Model_students();
   $model_students->tables    = 'students';
@@ -28,34 +33,40 @@
 
 ?>
                 <tr>
-                  <td><?= ++$id ?></td>
-                  <td><a href="students.php?action=read&id=<?=$row['id']?>"><?= $row['name'] ?></a></td>
+                  <td><?= ++$id ?>(<?=$row['id']?>)</td>
+                  <td>
+                    <a href="students.php?action=read&id=<?=$row['id']?>"><?= $row['name'] ?></a>
+                    <input type="hidden" name="student_id[]" value="<?= $row['id'] ?>">
+                  </td>
 <?php
   $model_schoolrooms         = new Model_schoolroom();
   $model_schoolrooms->tables = 'schoolrooms';
-  $schoolrooms_student  = $model_schoolrooms->read($row['schoolroom_id']);
-  $row_schoolroom       = $schoolrooms_student['name']; 
+  $schoolrooms_student       = $model_schoolrooms->read($row['schoolroom_id']);
+  $row_schoolroom            = $schoolrooms_student['name'];
 ?>                  
-                  <td><?= $row_schoolroom ?></td>
                   <td>
-                    <div class="custom-control custom-switch">
-                    <input type="checkbox" class="custom-control-input" id="customSwitch1" checked>
-                    <label class="custom-control-label" for="customSwitch1">حاضر</label>
-                    </div>
-                    <!-- <div class="custom-control custom-switch">
-                      <input type="checkbox" class="custom-control-input" disabled id="customSwitch2">
-                      <label class="custom-control-label" for="customSwitch2"></label>
-                    </div> -->
+                    <input type="hidden" name="schoolroom_id[]" value="<?= $row['schoolroom_id'] ?>">
+                    <?= $row_schoolroom ?>
+                  </td>
+                  <td>
+                  <select name="status[]" class="custom-select" >
+                    <option value="1" class="bg-success" selected>حاضر</option>
+                    <option value="0" class="text-danger">غائب</option>
+                  </select>
+                        <!-- <div class="custom-control custom-checkbox">
+                          <input type="checkbox" name="status[]" <?= "checked" ? 'value="1"' : 'value="0"' ?>  class="custom-control-input" id="<?=$row['id']?>" >
+                          <label class="custom-control-label" for="<?=$row['id']?>">حاضر</label>
+                        </div> -->
                   </td>
 
-                  <td>
-                      
-                  </td>
+                  <td><input type="text" name="day[]" value="<?= date('D(d-m-y)'); ?>"></td>
                 </tr>
+              
 <?php
   }
-
-?>             
+?>         
+              <button type="submit" name="submit"  class="btn btn-info" style="margin-bottom: 10px; margin-left:10px">Add Absence</button>
+              </form>    
               </tbody>
             </table>
         </div>

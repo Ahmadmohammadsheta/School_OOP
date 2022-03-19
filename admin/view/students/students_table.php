@@ -45,7 +45,7 @@
                   <td>
                     <a href="subscriptions.php?action=subscription&id=<?=$row['id']?>" class="btn btn-sm btn-success">دفع</a>
                     <a href="students.php?action=edit&id=<?=$row['id']?>" class="btn btn-sm btn-info">Edit</a>
-                    <a href="models/Delete.class.php?id=<?=$row['id']?>" class="btn btn-sm btn-danger">Delete</a>
+                    <a href="models/Delete.class.php?id=<?=$row['id']?>&table=students" class="btn btn-sm btn-danger">Delete</a>
                   </td>
                 </tr>
 <?php
