@@ -110,7 +110,7 @@
                                             <td class="text-danger text-bold"><?= $row['id'] ?></td>
                                         </tr>
                                         <tr>
-                                            <th scope="col"><?= $row_subscription['month'] ?> is : </th>
+                                            <th scope="col"><?= $row_subscription['month'] ?></th>
                                             <td class="text-danger text-bold"><?= $row_subscription['value'] ?></td>
                                         </tr>
                                       

@@ -11,11 +11,12 @@
         <label for="exampleFormControlSelect1">Schoolroom</label>
         <select name="schoolroom" class="form-control" id="exampleFormControlSelect1">
           <option value="<?php if(isset($_GET['schoolroom'])){echo $_GET['schoolroom'] ;} ?>" ><?php if(isset($_GET['schoolroom'])){echo $_GET['schoolroom'] ;} ?></option>
-        <?php
-          $selectSchoolroom = "SELECT * FROM schoolrooms";
-          $querySchoolroom  = $connect -> query($selectSchoolroom);
-          foreach($querySchoolroom as $schoolroom){
-        ?>
+          <?php
+            $model_schoolrooms         = new Model_schoolroom();
+            $model_schoolrooms->tables = 'schoolrooms';
+            $schoolrooms_student  = $model_schoolrooms->fetch();
+            foreach($schoolrooms_student as $schoolroom){
+          ?>
                               
                                 
           <option value="<?= $schoolroom['name'] ?>" ><?= $schoolroom['name'] ?></option>
@@ -55,7 +56,10 @@
 
 if (isset($_GET['search'])) 
 {
-
+  $model          = new Model_for_all();
+  $table   = $model->tables  = 'students';
+  $search  = $model->search($table);
+  $rows           = $model->fetch();  
     $filteredData         = $_GET['search'];
     $selectFilteredSearch = "SELECT * FROM students WHERE CONCAT(name,age,mother,phone,subscription) LIKE '%$filteredData%' ";
     $queryFilteredSearch  = $connect->query($selectFilteredSearch);

@@ -1,12 +1,15 @@
 <?php
 
-class Modal_for_all {
+class Model_for_all {
     private $server    ="localhost";
     private $username  ="root";
     private $password   ;
     private $dbname    ="School_OOP";
     public $connect;
     public $tables;
+    public $amount;
+    public $subscription = 150;
+
 
     public function __construct() {
         try {
@@ -79,6 +82,78 @@ class Modal_for_all {
             }
         }
         return $error_empty;
+    }
+
+    public function search($table) {
+        $data         = null;
+        $filteredData = $_GET['search'];
+        $select       = "SELECT * FROM $table WHERE CONCAT(name, age, mother_name, mother_phone) LIKE '%$filteredData%' ";
+        if ($query = $this->connect->query($select)) {
+            foreach ($query as $rows) {
+                $data[] = $rows;
+            }
+        }
+        return $data;
+    }
+
+    public function join1() {
+        $data = null;
+        $selectJoinData = "SELECT students.name, students.id ,students.age,students.schoolroom_id, schoolrooms.schoolrooms_name, subscriptions.month, subscriptions.value 
+                              FROM subscriptions   
+                              INNER JOIN students
+                              ON subscriptions.student_id=students.id
+                              INNER JOIN schoolrooms
+                              ON students.schoolroom_id=schoolrooms.schoolrooms_id
+                              ";
+        if ($query = $this->connect->query($selectJoinData)) {
+            while ($row   = mysqli_fetch_assoc($query)) {
+                $data[]   = $row;
+                // print_r($data);echo "<br>";           
+            }
+        }
+        return $data;
+    }
+
+    public function search_join() {
+        $data = null;
+        if (isset($_GET['submit'])) {
+            $filteredData = $_GET['search'];
+            $selectJoinData = "SELECT students.id, students.name, students.age, schoolrooms.schoolrooms_name, students.mother_name, students.mother_phone 
+                              FROM students   
+                              INNER JOIN schoolrooms
+                              ON students.schoolroom_id=schoolrooms.schoolrooms_id
+                              WHERE CONCAT(name, age, mother_name, mother_phone, schoolrooms_name) 
+                              LIKE '%$filteredData%' 
+                              ";
+            if ($query = $this->connect->query($selectJoinData)) {
+                while ($row   = mysqli_fetch_assoc($query)) {
+                    $data[]   = $row;
+                    // print_r($data);echo "<br>";           
+                }
+            }
+        return $data;        
+        }
+    }
+
+    public function search_join_schoolroom() {
+        $data = null;
+        if (isset($_GET['submit_schoolroom'])) {
+            $filteredData = $_GET['schoolroom'];
+            $selectJoinData = "SELECT students.id, students.name, students.age, schoolrooms.schoolrooms_name, students.mother_name, students.mother_phone 
+                              FROM students   
+                              INNER JOIN schoolrooms
+                              ON students.schoolroom_id=schoolrooms.schoolrooms_id
+                              WHERE CONCAT(name, age, mother_name, mother_phone, schoolrooms_name) 
+                              LIKE '%$filteredData%' 
+                              ";
+            if ($query = $this->connect->query($selectJoinData)) {
+                while ($row   = mysqli_fetch_assoc($query)) {
+                    $data[]   = $row;
+                    // print_r($data);echo "<br>";           
+                }
+            }
+        return $data;        
+        }
     }
 
 }

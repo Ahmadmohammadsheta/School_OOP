@@ -28,7 +28,7 @@
       foreach ($rows_schoolrooms as $row_schoolroom) {
   ?>
           
-            <option value="<?= $row_schoolroom['id'] ?>" ><?= $row_schoolroom['name'] ?></option>
+            <option value="<?= $row_schoolroom['schoolrooms_id'] ?>" ><?= $row_schoolroom['schoolrooms_name'] ?></option>
 <?php
       }
     }

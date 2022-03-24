@@ -2,7 +2,27 @@
 
 require_once 'Model_for_all.php';
 
-class Model_students extends Modal_for_all {
+class Model_students extends Model_for_all {
+
+// START FETCH STUDENTS METHOD
+    public function fetch_students_join() {
+        $data = null;
+        $selectJoinData = "SELECT students.name, students.id ,students.age, students.mother_name, students.mother_phone, schoolrooms.schoolrooms_name, schoolrooms.schoolrooms_id 
+                              FROM students
+                              INNER JOIN schoolrooms
+                              ON students.schoolroom_id=schoolrooms.schoolrooms_id
+                              ";
+        if ($query = $this->connect->query($selectJoinData)) {
+            while ($row   = mysqli_fetch_assoc($query)) {
+                $data[]   = $row;
+                // print_r($data);echo "<pre>";           
+            }
+        }
+        return $data;                     
+    }
+// END FETCH STUDENTS METHOD
+
+
 // START ADD STUDENT METHOD
     public function insert() {
         if (isset($_POST['submit'])) {

@@ -24,9 +24,8 @@
               <tbody>
               <form action="" method="post">
 <?php
-  $model_students            = new Model_students();
-  $model_students->tables    = 'students';
-  $rows                      = $model_students->fetch();
+  $model_absence            = new Model_absence();
+  $rows                      = $model_absence->fetch_absence_join();
   $id                        =0;
   foreach ($rows as $row) {
 
@@ -37,16 +36,10 @@
                   <td>
                     <a href="students.php?action=read&id=<?=$row['id']?>"><?= $row['name'] ?></a>
                     <input type="hidden" name="student_id[]" value="<?= $row['id'] ?>">
-                  </td>
-<?php
-  $model_schoolrooms         = new Model_schoolroom();
-  $model_schoolrooms->tables = 'schoolrooms';
-  $schoolrooms_student       = $model_schoolrooms->read($row['schoolroom_id']);
-  $row_schoolroom            = $schoolrooms_student['name'];
-?>                  
+                  </td>                 
                   <td>
-                    <input type="hidden" name="schoolroom_id[]" value="<?= $row['schoolroom_id'] ?>">
-                    <?= $row_schoolroom ?>
+                    <input type="hidden" name="schoolroom_id[]" value="<?= $row['schoolrooms_id'] ?>">
+                    <?= $row['schoolrooms_name'] ?>
                   </td>
                   <td>
                   <select name="status[]" class="custom-select" >
@@ -65,7 +58,7 @@
 <?php
   }
 ?>         
-              <button type="submit" name="submit"  class="btn btn-info" style="margin-bottom: 10px; margin-left:10px">Add Absence</button>
+              <button type="submit" name="submit"  class="btn btn-danger" style="margin-bottom: 10px;">تسجيل الغياب</button>
               </form>    
               </tbody>
             </table>

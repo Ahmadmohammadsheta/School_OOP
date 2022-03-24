@@ -1,5 +1,5 @@
 <?php
-	$active = 'dashboard';
+	$active = 'students';
 	include 'view/includes/header.inc.php';
 	include 'view/includes/sidebar.inc.php';
 
@@ -15,22 +15,23 @@
 				<li><a href="#">
 						<em class="fa fa-home"></em>
 					</a></li>
-				<li class="active">Dashboard</li>
+				<li class="active" style="font-size: large;">الطلاب</li>
 			</ol>
 		</div>
 		<!--/.row-->
 
 		<div class="row">
-			<div class="col-lg-12">
-				<h1 class="page-header">Dashboard</h1>
-			</div>
+<?php
+	include 'view/includes/search.inc.php';
+	?>
 		</div>
 		<!--/.row-->
 
-		<div class="panel panel-container">
+		<div class="panel ">
 			<div class="row">
 				<div class="col-xs-12 col-md-6 col-lg-4 no-padding">
 <?php
+
 	if(!isset($_GET['action'])){
 
 		include 'view/students/students_table.php';
@@ -53,7 +54,7 @@
 			</div>
 			<!--/.row-->
 		</div>
-
+	</div>
 		<!--/.row-->
 	<?php
 	include 'view/includes/footer.inc.php';

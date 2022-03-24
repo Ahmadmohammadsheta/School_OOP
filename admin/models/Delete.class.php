@@ -1,6 +1,6 @@
 <?php
     require 'Model_for_all.php';
-    $model  = new Modal_for_all();
+    $model  = new Model_for_all();
     $table  = $_GET['table'];
     // $model->tables  = $table;
     $id     = $_REQUEST['id'];
