@@ -4,7 +4,8 @@
     $model  = new Model_students();
     $model->tables = 'students';
     $id     = $_REQUEST['id'];
-    $row    = $model->read($id) ;
+    $table_id = 'id';
+    $row    = $model->read($id, $table_id) ;
     $update = $model->update($id);
 
 ?>
@@ -29,13 +30,13 @@
     $rows_schoolrooms   = $model->fetch();
     if (!empty($rows_schoolrooms)) {
       foreach ($rows_schoolrooms as $row_schoolroom) {
-          $schoolroom_id    = $row_schoolroom['id'];
+          $schoolroom_id    = $row_schoolroom['schoolrooms_id'];
           $schoolroom_fetch = $row['schoolroom_id'];
   ?>
             <option 
             <?= 'selected value="<?= $schoolroom_id ?>"' ? '' : 'selected value="<?= $schoolroom_fetch ?>"'  ?>
 
-            value="<?= $schoolroom_id ?>" ><?= $row_schoolroom['name'] ?></option>
+            value="<?= $schoolroom_id ?>" ><?= $row_schoolroom['schoolrooms_name'] ?></option>
 <?php
       }
     }

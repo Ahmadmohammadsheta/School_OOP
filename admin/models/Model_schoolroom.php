@@ -19,4 +19,20 @@ class Model_schoolroom extends Model_students{
             }
         }     
     }
+
+    public function fetch_absence_as_Schoolroom($schoolrooms_id) {
+        $data = null;
+        $selectJoinData = "SELECT students.name, students.id , schoolrooms.schoolrooms_name, schoolrooms.schoolrooms_id 
+                              FROM schoolrooms 
+                              INNER JOIN students
+                              ON students.schoolroom_id=schoolrooms.$schoolrooms_id
+                              ";
+        if ($query = $this->connect->query($selectJoinData)) {
+            while ($row   = mysqli_fetch_assoc($query)) {
+                $data[]   = $row;
+                // print_r($data);echo "<pre>";           
+            }
+        }
+        return $data;                     
+    }
 }

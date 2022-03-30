@@ -1,5 +1,5 @@
 <?php
-	$active = 'absences';
+	$active = 'teachers';
 	include 'view/includes/header.inc.php';
 	include 'view/includes/sidebar.inc.php';
 
@@ -15,34 +15,36 @@
 				<li><a href="#">
 						<em class="fa fa-home"></em>
 					</a></li>
-				<li class="active" style="font-size: large;">الغياب</li>
+				<li class="active" style="font-size: large;">المدرسين</li>
 			</ol>
 		</div>
 		<!--/.row-->
+
 		<div class="row">
-<?php
-	include 'view/includes/search.inc.php';
-?>
+
 		</div>
-		<div class="panel">
+		<!--/.row-->
+
+		<div class="panel ">
 			<div class="row">
 				<div class="col-xs-12 col-md-6 col-lg-4 no-padding">
 <?php
+
 	if(!isset($_GET['action'])){
 
-		include 'view/students/absences/absences_table.php';
+		include 'view/admins/teachers_table.php';
 
-	} elseif($_GET['action'] == 'teachers'){
+	} elseif($_GET['action'] == 'add'){
 
-		include 'view/admins/absences/absences_table.php';
+		include 'view/admins/add_user.php';
 
 	} elseif($_GET['action'] == 'edit'){
 
-		include 'view/students/edit_student.php';
+		include 'view/admins/edit_user.php';
 
 	} elseif($_GET['action'] == 'read'){
 
-		include 'view/students/read_student.php';
+		include 'view/admins/read_user.php';
 	} 
 ?>
 				</div>
@@ -50,7 +52,7 @@
 			</div>
 			<!--/.row-->
 		</div>
-
+	</div>
 		<!--/.row-->
 	<?php
 	include 'view/includes/footer.inc.php';

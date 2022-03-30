@@ -21,12 +21,17 @@
 		<!--/.row-->
 
 		<div class="row">
-			<div class="col-lg-12">
-				<h1 class="page-header">Dashboard</h1>
+<?php
+	include 'view/includes/search.inc.php';
+?>
+			<!-- <div class="col-md-2">
+				<input type="month" name="month" class="input-group"  value="" style="width: 100px;">
 			</div>
+			<div class="col-md-2">
+				<button type="submit" class="btn btn-success" style="margin-bottom: 5px;">شهر</button>  
+			</div> -->
 		</div>
-		<!--/.row-->
-
+		
 		<div class="panel panel-container">
 			<div class="row">
 				<div class="col-xs-12 col-md-6 col-lg-4 no-padding">

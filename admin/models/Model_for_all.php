@@ -37,9 +37,9 @@ class Model_for_all {
         return $data;
     }
 
-    public function read($id) {
+    public function read($id, $table_id) {
         $data      = null;
-        $select    = "SELECT * FROM $this->tables WHERE id = '$id' ";
+        $select    = "SELECT * FROM $this->tables WHERE $table_id = '$id' ";
         if ($query = $this->connect->query($select)) {
             $row   = mysqli_fetch_assoc($query);
             $data  = $row;
@@ -48,8 +48,8 @@ class Model_for_all {
         return $data;
     }
 
-    public function delete($table, $id) {
-        $delete = "DELETE FROM $table WHERE id = '$id' ";
+    public function delete($table, $table_id, $id) {
+        $delete = "DELETE FROM $table WHERE $table_id = '$id' ";
         if ($this->connect->query($delete)) {
             return true;
         } else {
@@ -72,18 +72,6 @@ class Model_for_all {
     // }
  
 
-    public function test() {
-        $error_empty = null;
-        if (isset($_POST['submit'])) {
-            foreach ($_POST as $key => $value) {
-                if (empty($value)) {
-                    echo $key." is empty"."<br>";
-                }
-            }
-        }
-        return $error_empty;
-    }
-
     public function search($table) {
         $data         = null;
         $filteredData = $_GET['search'];
@@ -98,9 +86,9 @@ class Model_for_all {
 
     public function join1() {
         $data = null;
-        $selectJoinData = "SELECT students.name, students.id ,students.age,students.schoolroom_id, schoolrooms.schoolrooms_name, subscriptions.month, subscriptions.value 
-                              FROM subscriptions   
-                              INNER JOIN students
+        $selectJoinData = "SELECT students.name, students.id ,students.age,students.schoolroom_id, schoolrooms.schoolrooms_name, subscriptions.subscriptions_id, subscriptions.month, subscriptions.value 
+                              FROM students   
+                              INNER JOIN subscriptions
                               ON subscriptions.student_id=students.id
                               INNER JOIN schoolrooms
                               ON students.schoolroom_id=schoolrooms.schoolrooms_id

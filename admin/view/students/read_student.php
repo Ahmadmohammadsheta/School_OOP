@@ -3,7 +3,8 @@
     $model = new Model_students();
     $id    = $_REQUEST['id'];
     $model->tables = 'students';
-    $row  = $model->read($id);
+    $table_id      = 'id';
+    $row  = $model->read($id, $table_id);
 
 ?>
 <div class="container">
@@ -38,11 +39,12 @@
 <?php
     $schoolroom_id      = $row['schoolroom_id'];
     $model->tables      = 'schoolrooms';
-    $row_schoolroom     = $model->read($schoolroom_id);
+    $table_id = 'schoolrooms_id';
+    $row_schoolroom     = $model->read($schoolroom_id, $table_id);
 ?>
                         <tr>
                             <th scope="col">Schoolroom is : </th>
-                            <td class="text-danger text-bold"><?= $row_schoolroom['name'] ?></td>
+                            <td class="text-danger text-bold"><?= $row_schoolroom['schoolrooms_name'] ?></td>
                         </tr>
 
 

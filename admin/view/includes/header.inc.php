@@ -1,13 +1,17 @@
 <?php
 session_start();
-if (!isset($_SESSION['login'])) {
-	// header('location:login.php');
-    require 'models/Model_for_all.php';
+if (!isset($_SESSION['username'])) {
+	header('location:login.php');
+} else {
+	require 'models/Model_for_all.php';
 	require 'models/Model_students.php';
     require 'models/Model_subscription.php';
     require 'models/Model_schoolroom.php';
     require 'models/Model_absence.php';
+    require 'models/Model_register_login.php';
+    require 'models/Model_teachers.php';
 }
+
 
 
 ?>

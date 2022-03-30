@@ -1,5 +1,4 @@
 
-<!-- SEARCH FORM -->
 
 <br>
 <div class="container">
@@ -21,11 +20,27 @@
                 </tr>
               </thead>
               <tbody>
+                <form action="" method="get">
+                  <div class="row">
+                    <div class="col-md-2">
+                      <input type="month" name="month" class="input-group"  value="" style="width: 100px;">
+                    </div>
+                    <div class="col-md-2">
+                      <button type="submit" class="btn btn-success" style="margin-bottom: 5px;">شهر</button>  
+                    </div>
+                  </div>
+                </form>
                 <form action="" method="post">
 <?php
+  if (isset($_GET['month'])) {
+    $month  = $_GET['month'];
+  } else {
+    $month  = date('m-Y');
+  }
   $model  = new Model_for_all();
-  $model->tables = 'students';
-  $rows = $model->join1();
+  // $rows = $model->join1();
+  $model_students = new Model_students();
+  $rows = $model_students->fetch_students_join();
   $subscription = $model->subscription;
   $model_subs   = new Model_subscription();
   $model_subs->tables = 'subscriptions';
@@ -36,39 +51,67 @@
 
   if (!empty($rows)) {
     foreach ($rows as $row) {
+      $student_id   = $row['id'];
+      $row_sum_value = $model_subs->fetch_sum_value($student_id, $month);
+      $month_once    = $row_sum_value['month'];
+
 
 ?>
                   <tr>
-                    <td class="text-center"><?= ++$id ?>(<?= $row['id'] ?>)</td>
+                    <td class="text-center"><?= ++$id ?>(<?= $row_sum_value['student_id'] ?>)</td>
                     <td>
                     <input type="hidden" name="student_id[]" value="<?= $row['id'] ?>">
                       <a href="students.php?action=read&id=<?=$row['id']?>"><?= $row['name'] ?></a>
                     </td>
                     <td class="text-center"><?= $row['age'] ?></td>
                     <td class="text-center">
-                    <input type="hidden" name="schoolrooms_id[]" value="<?= $row['schoolroom_id'] ?>">
+                    <input type="hidden" name="schoolroom_id[]" value="<?= $row['schoolrooms_id'] ?>">
                       <?= $row['schoolrooms_name'] ?>
                     </td>
                     <td class="text-center">
-                    <input type="hidden" name="month[]" value="<?= date('m-y') ?>" style="width: 50px;">
-                      <?= date('m-y') ?>
+                    <input type="hidden" name="month[]" value="<?= $month ?>" style="width: 50px;">
+                      <?= isset($month) ? "$month" : "$month_once" ?>
                     </td>
                     <td class="text-center">
                     <input class="text-center" type="text" name="value[]" value="<?= $subscription ?>" style="width: 50px;">
                     </td>
-                    <td class="text-center"><?= $row['value'] ?></td>
+                    <td class="text-center"><?= $row_sum_value['total'] ?></td>
                     <td class="text-center">
                       <a href="subscriptions.php?action=subscription&id=<?=$row['id']?>" class="btn btn-sm btn-success">دفع</a>
                       <a href="subscriptions.php?action=edit&id=<?=$row['id']?>" class="btn btn-sm btn-info">تعديل</a>
-                      <a href="models/Delete.class.php?id=<?=$row['id']?>" class="btn btn-sm btn-danger">حذف</a>
+                      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#d<?=$row['id']?>">
+                      Delete
+                      </button> 
+                      <!-- Modal -->
+                      <div class="modal fade" id="d<?=$row['id']?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">حذف</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              Are you sure you want to delete subscription of <span class="text-danger text-uppercase"><?= $row['name'] ?></span> ?
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                              <a href="models/Delete.class.php?id=<?=$row['subscriptions_id']?>&table=subscriptions&table_id=subscriptions_id" class="btn btn-danger">Delete</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </td>
                   </tr>
 <?php
     }
   }
-?>              
-                <button type="submit" name="submit_all" class="btn btn-success" style="margin-bottom: 5px;">دفع الكل</button>  
+?>              <div class="col-md-4">
+                   <button type="submit" name="submit_all" class="btn btn-success" style="margin-bottom: 5px;">دفع الكل</button>  
+                </div>
                 </form>
+
               </tbody>
             </table>
         </div>

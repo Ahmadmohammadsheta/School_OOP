@@ -3,16 +3,18 @@
     $model = new Model_students();
     $id    = $_REQUEST['id'];
     $model->tables = 'students';
-    $row  = $model->read($id);
+    $table_id = 'id';
+    $row  = $model->read($id, $table_id);
     //Schoolrooms
     $schoolroom_id      = $row['schoolroom_id'];
     $model->tables      = 'schoolrooms';
-    $row_schoolroom     = $model->read($schoolroom_id);
+    $table_id = 'schoolrooms_id';
+    $row_schoolroom     = $model->read($schoolroom_id, $table_id);
     //Subscriptions
     $model_subscription = new Model_subscription();
     $model_subscription->tables      = 'subscriptions';
     $row_subscriptions  = $model_subscription->fetch_where($id);  
-    $insert_subscription= $model_subscription->insert_subscription();
+    $insert_subscription= $model_subscription->insert_subscription_test();
 ?>
 <div class="container">
     <div class="row">
@@ -44,7 +46,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputEmail1"></label>
-                                        <input type="hidden" name="schoolroom_id" value="<?=$row_schoolroom['id']?>" class="form-control" id="exampleInputEmail1" style="width: 150px;" placeholder="الفصل ">
+                                        <input type="hidden" name="schoolroom_id" value="<?=$row_schoolroom['schoolrooms_id']?>" class="form-control" id="exampleInputEmail1" style="width: 150px;" placeholder="الفصل ">
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputEmail1"></label>
@@ -85,12 +87,12 @@
 
                                         <tr>
                                             <th scope="col">Schoolroom is : </th>
-                                            <td class="text-danger text-bold"><?= $row_schoolroom['name'] ?></td>
+                                            <td class="text-danger text-bold"><?= $row_schoolroom['schoolrooms_name'] ?></td>
                                         </tr>
                                         
                                         <tr>
                                             <th scope="col">Residual is : </th>
-                                            <td class="text-danger text-bold"><?= $row_schoolroom['name'] ?></td>
+                                            <td class="text-danger text-bold"><?= $row_schoolroom['schoolrooms_name'] ?></td>
                                         </tr>
                                     </thead>
                                     <tbody>

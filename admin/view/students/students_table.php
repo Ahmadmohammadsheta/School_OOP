@@ -32,46 +32,16 @@
     // GLOBAL STUDENT SEARCH
     if ($search_data = $model->search_join()) {
       $id = 0;
-      foreach ($search_data as $row_search) {
-?>
-                <tr>
-                  <td style="background-color: skyblue;"><?=$row_search['id']?></td>
-                  <td><?= ++$id ?></td>
-                  <td><a href="students.php?action=read&id=<?=$row_search['id']?>"><?= $row_search['name'] ?></a></td>
-                  <td><?= $row_search['age'] ?></td>           
-                  <td><?= $row_search['schoolrooms_name'] ?></td>                  
-                  <td><?= $row_search['mother_name'] ?></td>
-                  <td><?= $row_search['mother_phone'] ?></td>
-                  <td>
-                    <a href="subscriptions.php?action=subscription&id=<?=$row_search['id']?>" class="btn btn-sm btn-success">دفع</a>
-                    <a href="students.php?action=edit&id=<?=$row_search['id']?>" class="btn btn-sm btn-info">Edit</a>
-                    <a href="models/Delete.class.php?id=<?=$row_search['id']?>&table=students" class="btn btn-sm btn-danger">Delete</a>
-                  </td>
-                </tr>
-                
-<?php
+      foreach ($search_data as $row) {
+        include 'view/includes/students_rows.inc.php';
       }
       // SCHOOLROOM SEARCH
     } elseif ($search_schoolroom = $model->search_join_schoolroom()) {
       $id = 0;
-      foreach ($search_schoolroom as $row_search) {
-?>
-                <tr>
-                  <td style="background-color: skyblue;"><?=$row_search['id']?></td>
-                  <td><?= ++$id ?></td>
-                  <td><a href="students.php?action=read&id=<?=$row_search['id']?>"><?= $row_search['name'] ?></a></td>
-                  <td><?= $row_search['age'] ?></td>           
-                  <td><?= $row_search['schoolrooms_name'] ?></td>                  
-                  <td><?= $row_search['mother_name'] ?></td>
-                  <td><?= $row_search['mother_phone'] ?></td>
-                  <td>
-                    <a href="subscriptions.php?action=subscription&id=<?=$row_search['id']?>" class="btn btn-sm btn-success">دفع</a>
-                    <a href="students.php?action=edit&id=<?=$row_search['id']?>" class="btn btn-sm btn-info">Edit</a>
-                    <a href="models/Delete.class.php?id=<?=$row_search['id']?>&table=students" class="btn btn-sm btn-danger">Delete</a>
-                  </td>
-                </tr>
-<?php
+      foreach ($search_schoolroom as $row) {
+        include 'view/includes/students_rows.inc.php';
       }
+      //NO RECORDS FPOUND
     } else {
   ?>
                 <tr>
@@ -85,22 +55,8 @@
     $rows = $model_students->fetch_students_join();
     $id   =0;
     foreach ($rows as $row) {
-?>   
-                <tr>
-                  <td style="background-color: skyblue;"><?=$row['id']?></td>
-                  <td><?= ++$id ?></td>
-                  <td><a href="students.php?action=read&id=<?=$row['id']?>"><?= $row['name'] ?></a></td>
-                  <td><?= $row['age'] ?></td>           
-                  <td><?= $row['schoolrooms_name'] ?></td>                  
-                  <td><?= $row['mother_name'] ?></td>
-                  <td><?= $row['mother_phone'] ?></td>
-                  <td>
-                    <a href="subscriptions.php?action=subscription&id=<?=$row['id']?>" class="btn btn-sm btn-success">دفع</a>
-                    <a href="students.php?action=edit&id=<?=$row['id']?>" class="btn btn-sm btn-info">Edit</a>
-                    <a href="models/Delete.class.php?id=<?=$row['id']?>&table=students" class="btn btn-sm btn-danger">Delete</a>
-                  </td>
-                </tr> 
-<?php
+      include 'view/includes/students_rows.inc.php';
+
     }
   }
 ?>

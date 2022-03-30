@@ -2,7 +2,7 @@
 <?php
   $model_absence          = new Model_absence();
   $model_absence->tables  = 'absence';
-  $absences[]             = $model_absence->insert_absence_by_schoolroom();
+  $absences[]             = $model_absence->insert_absence();
 
 
 ?>
@@ -11,15 +11,6 @@
   <div class="row">
     <div class="col-lg-11"  style="margin: 25px;">
         <div class="card-body">
-
-<?php
-  $model_schoolroom         = new Model_for_all();
-  $model_schoolroom->tables = 'schoolrooms';
-  $rows_schoolrooms         = $model_schoolroom->fetch();
-  if (!empty($rows_schoolrooms)) {
-    foreach ($rows_schoolrooms as $row_schoolrooms) {
-      $schoolrooms_id = $row_schoolrooms['schoolrooms_id'];
-?>
             <table class="table table-bordered m-3">
               <thead>                  
                 <tr>
@@ -33,11 +24,10 @@
               <tbody>
               <form action="" method="post">
 <?php
-      $model_absence            = new Model_absence();
-      $rows                     = $model_absence->fetch_absence_as_Schoolroom($schoolrooms_id);
-      $id                       =0;
-      if (!empty($rows)) {
-        foreach ($rows as $row) {
+  $model_absence            = new Model_absence();
+  $rows                      = $model_absence->fetch_absence_join();
+  $id                        =0;
+  foreach ($rows as $row) {
 
 
 ?>
@@ -66,19 +56,12 @@
                 </tr>
               
 <?php
-        }
-      }
-      ?>
+  }
+?>         
               <button type="submit" name="submit"  class="btn btn-danger" style="margin-bottom: 10px;">تسجيل الغياب</button>
               </form>    
               </tbody>
             </table>
-
-      <?php
-    }
-  }
-?>         
-
         </div>
               <!-- /.card-body -->
     </div>

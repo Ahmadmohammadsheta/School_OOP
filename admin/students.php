@@ -23,7 +23,7 @@
 		<div class="row">
 <?php
 	include 'view/includes/search.inc.php';
-	?>
+?>
 		</div>
 		<!--/.row-->
 
