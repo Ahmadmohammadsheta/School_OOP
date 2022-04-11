@@ -1,31 +1,34 @@
 <?php
 class Model_register_login extends Model_for_all {
 
-    public function register($username, $phone, $password, $confirm_password, $email) {
+    public function register() {
         if (isset($_POST['register_btn'])) {
             if (isset($_POST['username'])          &&
                 isset($_POST['phone'])             &&
+                isset($_POST['age'])             &&
                 isset($_POST['password'])          &&
                 isset($_POST['confirm_password'])  &&
                 isset($_POST['email'])) {
                 if (!empty($_POST['username'])         &&
                     !empty($_POST['phone'])            &&
+                    !empty($_POST['age'])            &&
                     !empty($_POST['password'])         &&
                     !empty($_POST['confirm_password']) &&
                     !empty($_POST['email']) ) {
                         $username  = $_POST['username'];
                         $phone  = $_POST['phone']; 
+                        $age  = $_POST['age']; 
                         $password  = $_POST['password']; 
                         $confirm_password  = $_POST['confirm_password']; 
                         $email     = $_POST['email'];
                         if (!$this->exists_user($phone)) {
                             if ($this->confirm_passwor($password, $confirm_password)) {
-                                $insert = "INSERT INTO teachers (username, phone, password, email) VALUES ('$username', '$phone', '$password', '$email')";
+                                $insert = "INSERT INTO users (username, phone, age, password, email) VALUES ('$username', '$phone', '$age', '$password', '$email')";
                                 if ($query = $this->connect->query($insert)) {
                                     echo "<script>alert('success')</script>";
                                     echo "<script>window.location.href='login.php'</script>";
                                 } else {
-                                    echo "<script>alert('subscriped student')</script>";
+                                    echo "<script>alert('$username subscriped before')</script>";
                                 }
                             } else {
                                 echo "<script>alert('passwords dose not match')</script>";
@@ -50,7 +53,7 @@ class Model_register_login extends Model_for_all {
     }
 
     public function exists_user($phone) {
-        $select_email = "SELECT phone FROM teachers WHERE phone = '$phone' ";
+        $select_email = "SELECT phone FROM users WHERE phone = '$phone' ";
         if ($query = $this->connect->query($select_email)) {
             if ($query->num_rows > 0 ) {
                 return true;
@@ -72,7 +75,7 @@ class Model_register_login extends Model_for_all {
         if (isset($_POST['login_btn'])) {
             $username  = $_POST['username'];
             $password  = $_POST['password']; 
-            $select =  "SELECT * FROM teachers WHERE username = '$username' AND password = '$password'";
+            $select =  "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
             
             if ($query = $this->connect->query($select)) {
                 $user  = mysqli_fetch_assoc($query);

@@ -1,5 +1,5 @@
 <?php
-	$active = 'teachers';
+	$active = 'users';
 	include 'view/includes/header.inc.php';
 	include 'view/includes/sidebar.inc.php';
 
@@ -15,13 +15,15 @@
 				<li><a href="#">
 						<em class="fa fa-home"></em>
 					</a></li>
-				<li class="active" style="font-size: large;">المدرسين</li>
+				<li class="active" style="font-size: large;">الطلاب</li>
 			</ol>
 		</div>
 		<!--/.row-->
 
 		<div class="row">
-
+<?php
+	include 'view/includes/search.inc.php';
+?>
 		</div>
 		<!--/.row-->
 
@@ -32,19 +34,19 @@
 
 	if(!isset($_GET['action'])){
 
-		include 'view/teachers/teachers_table.php';
+		include 'view/users/users_table.php';
 
 	} elseif($_GET['action'] == 'add'){
 
-		include 'view/teachers/add_teacher.php';
+		include 'view/users/add_user.php';
 
 	} elseif($_GET['action'] == 'edit'){
 
-		include 'view/teachers/edit_teacher.php';
+		include 'view/users/edit_user.php';
 
 	} elseif($_GET['action'] == 'read'){
 
-		include 'view/teachers/read_teacher.php';
+		include 'view/users/read_user.php';
 	} 
 ?>
 				</div>

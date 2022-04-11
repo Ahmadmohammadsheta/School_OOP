@@ -34,7 +34,7 @@
 
 	} elseif($_GET['action'] == 'teachers'){
 
-		include 'view/admins/absences/absences_table.php';
+		include 'view/teachers/absences/absences_table.php';
 
 	} elseif($_GET['action'] == 'edit'){
 

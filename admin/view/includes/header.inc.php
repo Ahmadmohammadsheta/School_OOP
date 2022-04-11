@@ -11,8 +11,17 @@ if (!isset($_SESSION['username'])) {
     require 'models/Model_register_login.php';
     require 'models/Model_teachers.php';
 }
+?>
+<?php
+	if (isset($_GET['page'])) {
+		$page  = $_GET['page'];
+	} else {
+		$page  = 1;
+	}
 
-
+	if (isset($_GET['rer_page'])) {
+		$per_page = $_GET['rer_page'];
+	}
 
 ?>
 <!DOCTYPE html>

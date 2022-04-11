@@ -51,8 +51,8 @@
 									<input name="remember" type="checkbox" value="Remember Me">Remember Me
 								</label>
 							</div>
-							<button type="submit" name="login_btn" class="btn btn-primary">دخول</button>
-							<a href="register.php" class="btn btn-primary m-3">تسجيل جديد</a>
+							<button type="submit" name="login_btn" class="btn btn-success">دخول</button>
+							<a href="register.php" class="btn btn-warning m-3">تسجيل جديد</a>
 						</form>
 					</div>					
 			</div>

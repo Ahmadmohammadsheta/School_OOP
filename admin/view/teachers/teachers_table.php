@@ -10,6 +10,7 @@
             <div class="col-md-6">
             </div>
           </div>
+          <a href="teachers.php?action=add" class="btn btn-sm btn-info">مدرس جديد</a>
 
             <table class="table table-bordered">
               <thead>                  
@@ -31,19 +32,19 @@
     foreach ($rows as $row) {
 ?>
               <tr>
-                  <td style="background-color: skyblue;"><?=$row['id']?></td>
+                  <td style="background-color: skyblue;"><?=$row['teachers_id']?></td>
                   <td><?= ++$id ?></td>
-                  <td><a href="teachers.php?action=read&id=<?=$row['id']?>"><?= $row['username'] ?></a></td>
+                  <td><a href="teachers.php?action=read&id=<?=$row['teachers_id']?>"><?= $row['teachername'] ?></a></td>
                   <td><?= $row['schoolrooms_name'] ?></td>           
                   <td><?= $row['phone'] ?></td>           
                   <td><?= $row['age'] ?></td>           
                   <td>
-                    <a href="students.php?action=edit&id=<?=$row['id']?>" class="btn btn-sm btn-info">Edit</a>
-                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#d<?=$row['id']?>">
+                    <a href="teachers.php?action=edit&id=<?=$row['teachers_id']?>" class="btn btn-sm btn-info">Edit</a>
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#d<?=$row['teachers_id']?>">
                       Delete
                     </button> 
                     <!-- Modal -->
-                    <div class="modal fade" id="d<?=$row['id']?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="d<?=$row['teachers_id']?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog">
                         <div class="modal-content">
                           <div class="modal-header">
@@ -53,11 +54,11 @@
                             </button>
                           </div>
                           <div class="modal-body">
-                            Are you sure you want to delete <span class="text-danger text-uppercase"><?= $row['name'] ?></span> ?
+                            Are you sure you want to delete <span class="text-danger text-uppercase"><?= $row['teachername'] ?></span> ?
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <a href="models/Delete.class.php?id=<?=$row['id']?>&table=students&table_id=id" class="btn btn-danger">Delete</a>
+                            <a href="models/Delete.class.php?id=<?=$row['teachers_id']?>&table=teachers&table_id=teachers_id" class="btn btn-danger">Delete</a>
                           </div>
                         </div>
                       </div>

@@ -36,6 +36,18 @@ class Model_subscription extends Model_for_all {
         }
     }
 
+    public function check_exists_subscription($student_id, $month) {
+        $select    = "SELECT value FROM absence WHERE student_id = '$student_id' AND month = '$month' ";
+        if ($query = $this->connect->query($select)) {
+            $row   = mysqli_fetch_assoc($query);
+            if (!empty($row)) {
+                return true;
+            } else {
+                return false;
+            }          
+        }
+    }
+
     public function insert_subscription() {
 
         if (isset($_POST['submit'])) {

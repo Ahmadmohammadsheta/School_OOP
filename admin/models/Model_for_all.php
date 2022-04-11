@@ -144,4 +144,19 @@ class Model_for_all {
         }
     }
 
+    public function pagination($page, $per_page) {
+        if (isset($_GET['page'])) {
+            $page  = $_GET['page'];
+        } else {
+            $page  = 1;
+        }
+    
+        if (isset($_GET['rer_page'])) {
+            $per_page = $_GET['rer_page'];
+        }
+
+        
+    
+    }
+
 }

@@ -12,9 +12,9 @@
     $row_schoolroom     = $model->read($schoolroom_id, $table_id);
     //Subscriptions
     $model_subscription = new Model_subscription();
-    $model_subscription->tables      = 'subscriptions';
-    $row_subscriptions  = $model_subscription->fetch_where($id);  
     $insert_subscription= $model_subscription->insert_subscription_test();
+
+
 ?>
 <div class="container">
     <div class="row">
@@ -106,7 +106,10 @@
                                 <table class="table">
                                     <thead class="thead-dark">
 <?php
-    foreach ($row_subscriptions as $row_subscription) {
+    $model_subscription->tables      = 'subscriptions';
+    $row_subscriptions  = $model_subscription->fetch_where($id);
+    if (!empty($row_subscriptions)) {
+        foreach ($row_subscriptions as $row_subscription) {
 ?>        
                                         <tr>
                                             <td class="text-danger text-bold"><?= $row['id'] ?></td>
@@ -117,6 +120,9 @@
                                         </tr>
                                       
 <?php
+        }
+    } else {
+        echo '<tr><td class="text-danger text-bold"><h3>لم يدفع بعد</h3></td></tr>';
     }
 ?>
                                     </thead>

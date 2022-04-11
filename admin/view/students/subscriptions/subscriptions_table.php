@@ -6,7 +6,15 @@
     <div class="col-lg-11"  style="margin: 25px;">
         <div class="card-body">
           <!-- <a href="subscriptions.php?action=subscription" class="btn btn-info" style="margin-bottom: 10px;">Add Subsription</a> -->
-            <table class="table table-bordered m-3">
+<?php
+  $model_schoolroom         = new Model_for_all();
+  $model_schoolroom->tables = 'schoolrooms';
+  $rows_schoolrooms         = $model_schoolroom->fetch();
+  if (!empty($rows_schoolrooms)) {
+    foreach ($rows_schoolrooms as $row_schoolrooms) {
+      $schoolrooms_id = $row_schoolrooms['schoolrooms_id'];
+?>
+          <table class="table table-bordered m-3">
               <thead>                  
                 <tr>
                   <th style="width: 10px">id</th>
@@ -40,7 +48,7 @@
   $model  = new Model_for_all();
   // $rows = $model->join1();
   $model_students = new Model_students();
-  $rows = $model_students->fetch_students_join();
+  $rows = $model_students->fetch_students_as_schoolroom($schoolrooms_id);
   $subscription = $model->subscription;
   $model_subs   = new Model_subscription();
   $model_subs->tables = 'subscriptions';
@@ -105,8 +113,8 @@
                     </td>
                   </tr>
 <?php
-    }
-  }
+        }
+      }
 ?>              <div class="col-md-4">
                    <button type="submit" name="submit_all" class="btn btn-success" style="margin-bottom: 5px;">دفع الكل</button>  
                 </div>
@@ -114,6 +122,10 @@
 
               </tbody>
             </table>
+<?php   
+    }
+  }
+?>
         </div>
               <!-- /.card-body -->
     </div>

@@ -31,18 +31,8 @@
 <?php
 	$model_register = new Model_register_login();
 	if (isset($_POST['register_btn'])) {
-		if (!empty($_POST['username'])        &&
-			!empty($_POST['phone'])         &&
-			!empty($_POST['password'])         &&
-			!empty($_POST['email']) ) {
-				$username  = $_POST['username'];
-				$phone  = $_POST['phone']; 
-				$password  = $_POST['password']; 
-				$confirm_password  = $_POST['confirm_password']; 
-				$email     = $_POST['email'];
-				$model_register->register($username, $phone, $password, $confirm_password, $email);
+				$model_register->register();
 		}
-	}
 ?>
 					<form role="form" method="post">
 						<fieldset>
@@ -56,6 +46,9 @@
 								<input class="form-control" placeholder="E-mail" name="email" type="email" autofocus="">
 							</div>
 							<div class="form-group">
+								<input class="form-control" placeholder="age" name="age" type="number" autofocus="">
+							</div>
+							<div class="form-group">
 								<input class="form-control" placeholder="Password" name="password" type="password" value="">
 							</div>
 							<div class="form-group">
@@ -66,8 +59,8 @@
 									<input name="remember" type="checkbox" value="Remember Me">Remember Me
 								</label>
 							</div>
-							<button type="submit" name="register_btn" class="btn btn-primary">تسجيل</button>
-							<a href="login.php" name="register_btn" class="btn btn-primary m-3">لدى حساب</a>
+							<button type="submit" name="register_btn" class="btn btn-success">تسجيل</button>
+							<a href="login.php" name="register_btn" class="btn btn-warning m-3">لدى حساب</a>
 						</fieldset>
 						</form>
 				</div>
