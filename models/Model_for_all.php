@@ -44,13 +44,13 @@ class Modal_for_all {
         return $data;
     }
 
-    public function delete($id) {
-        $destroy = "DELETE FROM $this->tables WHERE id = '$id' ";
-        if ($query = $this->connect->query($destroy)) {
-            return true;
-        } else {
-            return false;
-        };
-    }
+    // public function delete($id) {
+    //     $destroy = "DELETE FROM $this->tables WHERE id = '$id' ";
+    //     if ($query = $this->connect->query($destroy)) {
+    //         return true;
+    //     } else {
+    //         return false;
+    //     };
+    // }
 
 }

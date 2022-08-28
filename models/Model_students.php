@@ -1,26 +1,6 @@
 <?php
 
-class Model_students {
-    private $server    ="localhost";
-    private $username  ="root";
-    private $password  ="";
-    private $dbname    ="School_OOP";
-    public $connect;
-    public $tables;
-
-    public function __construct() {
-        try {
-            $this->connect = new mysqli(
-                        $this->server,
-                        $this->username,
-                        $this->password,
-                        $this->dbname
-                    );
-        } catch (Exception $er) {
-            echo "Connection failed ". $er->getMessage();
-        }
-        
-    }
+class Model_students extends Modal_for_all {
 
     public function students_posts () {
 
@@ -81,27 +61,7 @@ class Model_students {
         }     
     }
 
-    public function fetch() {
-        $data = null;
-        $select = "SELECT * FROM $this->tables ";
-        if ($query = $this->connect->query($select)) {
-            while ($row = mysqli_fetch_assoc($query)) {
-                $data[] = $row;
-            }
-        } 
-        return $data;       
-    }
 
-    public function read($id) {
-        $data = null ;
-        $select = "SELECT * FROM $this->tables WHERE id = '$id' ";
-        if ($query = $this->connect->query($select)) {
-            while ($row = mysqli_fetch_assoc($query)) {
-                $data = $row;
-            }
-        }
-        return $data;
-    }
 
     public function update($id) {
         if (isset($_POST['submit'])) {
@@ -150,6 +110,18 @@ class Model_students {
         } else {
             return false;
         };
+    }
+
+    public function test() {
+        $error_empty = null;
+        if (isset($_POST['submit'])) {
+            foreach ($_POST as $key => $value) {
+                if (empty($value)) {
+                    echo $key." is empty"."<br>";
+                }
+            }
+        }
+        return $error_empty;
     }
 
 

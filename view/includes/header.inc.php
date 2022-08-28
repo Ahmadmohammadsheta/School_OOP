@@ -2,6 +2,9 @@
 session_start();
 if (!isset($_SESSION['login'])) {
 	// header('location:login.php');
+    require 'models/Model_for_all.php';
+	require 'models/Model_students.php';
+    require 'models/Model_subscription.php';
 }
 
 

@@ -21,7 +21,6 @@
               </thead>
               <tbody>
 <?php
-  require 'models/Model_students.php';
   $model  = new Model_students();
   $model->tables = 'students';
   $rows = $model->fetch();

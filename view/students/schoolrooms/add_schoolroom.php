@@ -1,7 +1,6 @@
 
 <div class="add_form"  style="margin: 30px;">
 <?php
-    require 'models/Model_students.php';
     $model  = new Model_schoolroom;
     $model->tables = 'schoolrooms';
     $insert = $model->insert();
